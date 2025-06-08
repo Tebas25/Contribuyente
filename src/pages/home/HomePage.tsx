@@ -17,35 +17,31 @@ interface FormData {
 }
 
 export const HomePage = () => {
-  const { register, formState: { errors }, handleSubmit, getValues, setValue } = useForm<FormData>();
+  const { 
+    register, 
+    formState: { errors }, 
+    handleSubmit, 
+    setValue, 
+    unregister,
+    getValues
+  } = useForm<FormData>();
+
   const { loadingTaxPayer, getTaxPayerStatus } = useTaxPayer();
   const { mutateAsync: getInfo, data: info, reset: resetInfo } = useTaxPayerInformation();
   const { mutateAsync: getCarInfo, data: carInfo, reset: resetCarInfo } = useCarInformation();
   const { mutateAsync: getLicensePoints, data: puntosData, reset: resetPuntos } = useLicensePoints();
 
-  useEffect(() => {
-  if (errors.cedula && errors.cedula.type === "required") {
-    Notifications.getWarning("La cédula es obligatoria");
-  }
-  if (errors.email && errors.email.type === "required") {
-    Notifications.getWarning("El correo electrónico es obligatorio");
-  }
-  if (errors.matricula && errors.matricula.type === "required") {
-    Notifications.getWarning("La matrícula es obligatoria");
-  }
-}, [errors]);
-
-  useEffect(() => { resetPuntos(); }, [getValues, info, resetPuntos]);
+  useEffect(() => { resetPuntos(); }, [info, resetPuntos]);
 
   const limpiarTodo = () => {
     setValue("matricula", "");
+    unregister("matricula");
     resetInfo();
     resetCarInfo();
     resetPuntos();
   };
 
-  const onBuscarContribuyente = async () => {
-    const data = getValues();
+  const onBuscarContribuyente = async (data: FormData) => {
     const isContribuyente = await getTaxPayerStatus(data.cedula);
     if (isContribuyente) {
       await getInfo(data.cedula);
@@ -56,24 +52,26 @@ export const HomePage = () => {
 
   const onConsultarMatricula = async () => {
     const data = getValues();
-    if (data.matricula && data.cedula) {
-      await getCarInfo(data.matricula);
-      const cedulaAnt = data.cedula.substring(0, 10);
-      await getLicensePoints({ cedula: cedulaAnt, placa: data.matricula });
+    if (!data.matricula) {
+      Notifications.getWarning("La matrícula es obligatoria");
+      return;
     }
+    await getCarInfo(data.matricula);
+    const cedulaAnt = data.cedula.substring(0, 10);
+    await getLicensePoints({ cedula: cedulaAnt, placa: data.matricula });
   };
 
   const style = { padding: '10px' };
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-      <form className="mb-4" autoComplete="off" onSubmit={e => e.preventDefault()}>
+      <form className="mb-4" autoComplete="off" onSubmit={handleSubmit(onBuscarContribuyente)}>
         <div
           style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "2rem",
-          flexWrap: "wrap"
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "2rem",
+            flexWrap: "wrap"
           }}
         >
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -88,12 +86,12 @@ export const HomePage = () => {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <InputText
-            nameStrong="Correo electrónico"
-            field="email"
-            register={register("email", { required: true })}
-            typeError={errors.email}
-            required
-            style={{ maxWidth: "320px" }}
+              nameStrong="Correo electrónico"
+              field="email"
+              register={register("email", { required: true })}
+              typeError={errors.email}
+              required
+              style={{ maxWidth: "320px" }}
             />
           </div>
           {info && (
@@ -101,9 +99,8 @@ export const HomePage = () => {
               <InputText
                 nameStrong="Matrícula"
                 field="matricula"
-                register={register("matricula", { required: true })}
-                typeError={errors.matricula}
-                required
+                register={register("matricula")} 
+                typeError={undefined}
                 style={{ maxWidth: "180px" }}
               />
             </div>
@@ -112,20 +109,20 @@ export const HomePage = () => {
             <div style={{ display: "flex", flexDirection: "column", minWidth: 170 }}>
               <label
                 style={{
-                fontWeight: 600,
-                marginBottom: 6,
-                fontSize: 15,
-                color: "#222"
+                  fontWeight: 600,
+                  marginBottom: 6,
+                  fontSize: 15,
+                  color: "#222"
                 }}
               >
                 Puntos de licencia:
               </label>
               <span
                 style={{
-                fontSize: 22,
-                color: "#2563eb",
-                fontWeight: 700,
-                lineHeight: "2.1rem"
+                  fontSize: 22,
+                  color: "#2563eb",
+                  fontWeight: 700,
+                  lineHeight: "2.1rem"
                 }}
               >
                 {puntosData.puntos}
@@ -135,24 +132,23 @@ export const HomePage = () => {
         </div>
         <div style={{ display: "flex", gap: "1.5rem", marginTop: 22 }}>
           <ButtonComponent
-            type="button"
+            type="submit"
             text="Buscar contribuyente"
             loading={loadingTaxPayer}
-            onClick={handleSubmit(onBuscarContribuyente)}
             style={{ minWidth: 180 }}
           />
           {info && (
             <ButtonComponent
               type="button"
               text="Consultar Matrícula"
-              onClick={handleSubmit(onConsultarMatricula)}
+              onClick={onConsultarMatricula}
               style={{ minWidth: 180 }}
             />
           )}
         </div>
       </form>
 
-      {/* ...Tus tablas igual */}
+      {/* Tablas */}
       {info && (
         <div className="tabla-container mt-10 p-4 rounded-lg shadow bg-white">
           <TableWrapper
