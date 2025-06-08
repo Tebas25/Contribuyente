@@ -38,9 +38,8 @@ El frontend estará disponible en http://localhost:5173
 ## Configuración
 Si tu backend NO está en localhost:8080, modifica las URLs de los hooks:
 
-src/hooks/contribuyente/contribuyentes-request.ts
+src\hooks\contribuyente\contribuyentes-request.ts
 
-src/hooks/matriculaANT/matricula-ant-request.ts
+src\hooks\matriculaANT\matricula-ant-request.ts
 
-src/hooks/matriculaANT/use-licence-points.ts
 
