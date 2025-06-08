@@ -6,7 +6,6 @@ Aplicación web para la consulta unificada de **contribuyentes**, **vehículos**
 
 ## 🚀 Requisitos previos
 
-- [Node.js y npm](https://nodejs.org/) (recomendado Node 18+)
 - Tener el backend (API) corriendo en `localhost:8080`  
   (Si usas otro puerto o endpoint, ajusta las URLs en los hooks)
 
