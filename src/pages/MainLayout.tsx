@@ -12,16 +12,13 @@ export const MainLayout = () => {
           <span
             className="icon-home home-icon"
             onClick={() => navigate('/')}
+            title="Volver a inicio"
+            style={{ cursor: "pointer" }}
           />
         </div>
-        <h1 className="title">Sistema de indentificación de contribuyente</h1>
+        <h1 className="title">Sistema de identificación de contribuyente</h1>
         <div className="header-right" />
       </header>
-
-      {/* Barra de navegación */}
-      <nav className="nav-buttons">
-        <button onClick={() => navigate('/contribuyente')}>Contribuyente</button>
-      </nav>
 
       {/* Contenido central */}
       <main className="main-content">
