@@ -8,6 +8,7 @@ import { Column } from "primereact/column";
 import { useCarInformation } from "../../hooks/matriculaANT/use-car-information";
 import { useLicensePoints } from "../../hooks/matriculaANT/use-licence-points";
 import { useEffect } from "react";
+import { Notifications } from "../../components/notification.component";
 
 interface FormData {
   cedula: string;
@@ -16,16 +17,26 @@ interface FormData {
 }
 
 export const HomePage = () => {
-  const { register, formState: { errors }, getValues, setValue } = useForm<FormData>();
+  const { register, formState: { errors }, handleSubmit, getValues, setValue } = useForm<FormData>();
   const { loadingTaxPayer, getTaxPayerStatus } = useTaxPayer();
   const { mutateAsync: getInfo, data: info, reset: resetInfo } = useTaxPayerInformation();
   const { mutateAsync: getCarInfo, data: carInfo, reset: resetCarInfo } = useCarInformation();
   const { mutateAsync: getLicensePoints, data: puntosData, reset: resetPuntos } = useLicensePoints();
 
-  // Limpiar puntos cuando cambia la matrícula o la cédula
+  useEffect(() => {
+  if (errors.cedula && errors.cedula.type === "required") {
+    Notifications.getWarning("La cédula es obligatoria");
+  }
+  if (errors.email && errors.email.type === "required") {
+    Notifications.getWarning("El correo electrónico es obligatorio");
+  }
+  if (errors.matricula && errors.matricula.type === "required") {
+    Notifications.getWarning("La matrícula es obligatoria");
+  }
+}, [errors]);
+
   useEffect(() => { resetPuntos(); }, [getValues, info, resetPuntos]);
-  
-  // Limpiar tabla, matrícula y puntos pero NO cédula/email
+
   const limpiarTodo = () => {
     setValue("matricula", "");
     resetInfo();
@@ -33,7 +44,6 @@ export const HomePage = () => {
     resetPuntos();
   };
 
-  // Buscar contribuyente
   const onBuscarContribuyente = async () => {
     const data = getValues();
     const isContribuyente = await getTaxPayerStatus(data.cedula);
@@ -44,12 +54,10 @@ export const HomePage = () => {
     }
   };
 
-  // Consultar matrícula y puntos
   const onConsultarMatricula = async () => {
     const data = getValues();
     if (data.matricula && data.cedula) {
       await getCarInfo(data.matricula);
-      // Extraer solo los primeros 10 dígitos de la cédula para la ANT
       const cedulaAnt = data.cedula.substring(0, 10);
       await getLicensePoints({ cedula: cedulaAnt, placa: data.matricula });
     }
@@ -130,14 +138,14 @@ export const HomePage = () => {
             type="button"
             text="Buscar contribuyente"
             loading={loadingTaxPayer}
-            onClick={onBuscarContribuyente}
+            onClick={handleSubmit(onBuscarContribuyente)}
             style={{ minWidth: 180 }}
           />
           {info && (
             <ButtonComponent
               type="button"
               text="Consultar Matrícula"
-              onClick={onConsultarMatricula}
+              onClick={handleSubmit(onConsultarMatricula)}
               style={{ minWidth: 180 }}
             />
           )}
