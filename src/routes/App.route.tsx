@@ -6,7 +6,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route path="admin/HomePage" element={<HomePage />} />
+        <Route path="/contribuyente" element={<HomePage />} />
       </Route>
     </Routes>
   );

@@ -20,7 +20,7 @@ export const MainLayout = () => {
 
       {/* Barra de navegación */}
       <nav className="nav-buttons">
-        <button onClick={() => navigate('/admin/HomePage')}>Contribuyente</button>
+        <button onClick={() => navigate('/contribuyente')}>Contribuyente</button>
       </nav>
 
       {/* Contenido central */}
