@@ -15,7 +15,6 @@ export const useTaxPayer = (): {
     mutationKey: ['getIsTaxPayerStatus'],
     mutationFn: fetchTaxPayerStatus,
     onSuccess: (data) => {
-      console.log('onSuccess', data);
       if (data === false) {
         Notifications.getError('Esta persona no es contribuyente');
       } else if (data === true) {
