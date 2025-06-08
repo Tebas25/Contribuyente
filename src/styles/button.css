@@ -1,0 +1,13 @@
+.my-btn {
+  padding: 10px 28px;
+  border-radius: 8px;
+  background: #23272f;
+  color: white;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.my-btn:hover { background: #1e40af; }
+.my-btn:disabled { opacity: 0.6; cursor: not-allowed; }

@@ -1,0 +1,56 @@
+/* Header completo */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1f2937;
+  color: white;
+  padding: 12px 24px;
+}
+
+/* Ícono a la izquierda */
+.header-left .home-icon {
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* Título centrado */
+.title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0 auto;
+}
+
+/* Ocupa el espacio derecho para mantener centrado */
+.header-right {
+  width: 32px;
+}
+
+/* Botones de navegación */
+.nav-buttons {
+  background-color: #f4f4f4;
+  padding: 10px 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.nav-buttons button {
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.nav-buttons button:hover {
+  background-color: #374151;
+}
+
+/* Contenido general */
+.main-content {
+  padding: 24px;
+  background-color: #f2f3f5;
+  min-height: 100vh;
+}

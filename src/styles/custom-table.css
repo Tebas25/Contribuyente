@@ -1,0 +1,63 @@
+.custom-table .p-datatable-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.custom-table .p-datatable {
+  border: none;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #2C3E50;
+}
+
+.custom-table .p-datatable-thead > tr > th {
+  background-color: #3C8DBC; /* Celeste armónico */
+  color: #FFFFFF; /* Blanco puro */
+  font-weight: bold;
+  padding: 1rem;
+  border-bottom: 1px solid #2C3E50;
+}
+
+.custom-table .p-datatable-tbody > tr > td {
+  padding: 0.9rem;
+  text-align: left !important;
+  border-bottom: 1px solid #DADFE6;
+}
+
+.custom-table .p-datatable-tbody > tr:nth-child(even) > td {
+  background-color: #F9FAFC;
+}
+
+.custom-table .p-datatable-tbody > tr:nth-child(odd) > td {
+  background-color: #FFFFFF;
+}
+
+.custom-table .p-datatable-tbody > tr:hover > td {
+  background-color: #E6F1FA; /* Hover en tono suave */
+}
+
+.custom-table .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.custom-table .p-column-title {
+  font-weight: 600;
+}
+
+.tabla-container {
+  margin-top: 32px; /* O el valor que prefieras */
+}
+
+.tabla-container th {
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+/* Centra las celdas */
+.tabla-container td {
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+

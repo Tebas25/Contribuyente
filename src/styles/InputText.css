@@ -1,0 +1,53 @@
+.input-container {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 14px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.inputs-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.input-container {
+  flex: 1 1 0px;
+}
+
+.input-cedula {
+  max-width: 230px;
+}
+
+.input-email {
+  min-width: 350px;
+  flex: 2 1 0px;
+}
+
