@@ -1,0 +1,44 @@
+.Toastify__toast {
+  border-radius: 12px !important;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-size: 15px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 12px 20px !important;
+}
+
+.Toastify__toast--info {
+  background: #2979ff !important;
+  color: #fff !important;
+}
+
+.Toastify__toast--success {
+  background: #43a047 !important;
+  color: #fff !important;
+}
+
+.Toastify__toast--warning {
+  background: #ffb300 !important;
+  color: #2c3e50 !important;
+}
+
+.Toastify__toast--error {
+  background: #e53935 !important;
+  color: #fff !important;
+}
+
+.Toastify__close-button {
+  color: #fff !important;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255,255,255,0.7);
+  height: 5px;
+  border-radius: 0 0 6px 6px;
+}
+

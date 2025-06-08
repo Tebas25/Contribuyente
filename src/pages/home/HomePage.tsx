@@ -63,7 +63,7 @@ export const HomePage = () => {
         <div
           style={{
           display: "flex",
-          alignItems: "flex-start", // alineación superior
+          alignItems: "flex-start",
           gap: "2rem",
           flexWrap: "wrap"
           }}

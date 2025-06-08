@@ -6,7 +6,8 @@ import './styles/index.css'
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-
+import 'react-toastify/dist/ReactToastify.css';
+import './styles/toast-custom.css';
 
 // main.tsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
